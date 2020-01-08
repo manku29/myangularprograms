@@ -1,0 +1,13 @@
+<app-post-form [currentPost1]="currentPost" (newPost)="onNewPost($event)"></app-post-form>
+<div class="cart" *ngFor="let p of post">
+    <div class="card-body">   
+      <h3>{{p.id}}</h3>  
+      <h3>{{p.title}}</h3>
+      <h3>{{p.body}}</h3>
+        <button class="btn btn-danger" >danger </button>
+        <button (click)="editPost(p)" class="btn btn-light"> Pencil</button>
+    </div>
+
+
+ 
+</div>

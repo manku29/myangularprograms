@@ -1,0 +1,71 @@
+<button (click)="showUserForm = !showUserForm" class="btn btn-dark mb-3">Add User</button>
+<p>
+  Users Excersize!
+</p>
+<div class="card card-body" *ngIf="showUserForm">
+  <h2>Add User</h2>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+    <div class="form-group">
+      <label>First Name</label>
+      <input [(ngModel)] ="user.firstName" 
+      type="text" 
+      name="firstName"  
+      [ngClass]="{'is-invalid':userFirstName.errors && userFirstName.touched}"
+      #userFirstName="ngModel"
+      required
+      minlength="2"
+      class="form-controller">
+      <div [hidden]="!userFirstName.errors?.required" class="invalid-feedback">First Name Required</div>
+    </div>
+  
+    <div class="form-group">
+      <label>Last Name</label>
+      <input [(ngModel)]="user.lastName"
+       type="text" name="lastName"
+       #userLastName="ngModel"
+       [ngClass]="{'is-invalid':userLastName.errors && userLastName.touched}"
+       minlength="2"
+       class="form-controller">
+       <div [hidden]="!userLastName.errors?.required" class="invalid-feedback">Last Name Required</div>
+       </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input [(ngModel)]="user.email"
+      #userEmail="ngModel"
+      [ngClass]="{'is-invalid':userEmail.errors && userEmail.touched}"
+      type="email" name="Email"
+       class="form-controller">
+       <div [hidden]="!userEmail.errors?.required" class="invalid-feedback">Please correct Email</div>
+    </div>
+    
+    <button  (mouseover)="fireEvent($event)"
+    [disabled]="!userForm.form.valid" class="btn btn-light
+    btn-block mb-3 big-text">Add New User</button>
+
+  </form>
+</div>
+
+<!--<ul *ngIf="users.length > 0 ; else noUsers"> -->
+<ul class="list-unstyled" *ngIf="users?.length > 0 && loaded">
+  <li class="card" *ngFor="let user of users">
+
+    <div class="col-sm-4">
+    </div>
+    <h2>{{user.firstName | uppercase}} {{user.lastName}}
+      <small>
+
+        <!-- <button (click)="toggleHide(user)" class="btn btn-dark btn-sm">Toggle</button>
+       -->
+        <button (click)="user.hide = !user.hide" class="fa fa-plus">Toggle</button>
+      </small>
+    </h2>
+
+    <ul class="list-group-item" *ngIf="!user.hide">
+      <li class="list-group-item">Email {{user.email}}</li>
+     
+      <li class="list-group-item">Joined:{{user.registered | date:"short"}}</li>
+    </ul>
+  </li>
+</ul>
+<h2 *ngIf="users?.length == 0">No Users Found</h2>
+<!-- <h4 *ngIf="!loaded">Loading Users......</h4> -->

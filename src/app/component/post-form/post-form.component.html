@@ -1,0 +1,20 @@
+<p>
+  post-form works!
+</p>
+
+<div class="cart ">
+<form>
+<div class="form-group">
+  <label>Title</label>
+  <input type="text" class="form-control" [(ngModel)]="currentPost1.title" name="title" #title>
+  </div>
+  <div class="form-group">
+      <label>Body</label>
+      <input type="text" [(ngModel)]="currentPost1.body" class="form-control" name="body" #body>
+    
+    </div>
+    <input type="hidden" [(ngModel)]="currentPost1.id" name="id">
+      <button (click)="addPost(title.value,body.value)" class="btn">Add Post</button>
+</form>
+
+  </div>
